@@ -1,181 +1,232 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster|Raleway|Syncopate" rel="stylesheet">
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster|Raleway|Syncopate" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha3
+	84-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		<script
-		  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-		  crossorigin="anonymous">
-		</script>
-
-	</head>
-
-	<body>
-
-
-		<style>
-
-		.hidden_class {
-			display: none;
-		}
-
-		</style>
-
-		<div id="step_0" class="wrapperSteps">
-
-			<h1>Hello!</h1>
-
-			<!-- <button onclick="blueButt()" id="Blue">Click here to have the back-ground blue.</button>
-
-			<button onclick="pinkButt()" id="Pink">Click here to have the back-ground pink.</button>
-
-			<button onclick="whiteButt()" id="White">Click here to have the back-ground white.</button> -->
-
-			<h3>Please answer a few questions to RSVP</h3>
-
-
-		</div>
-
-		<button id="nextButt">NEXT</button>
-
-		<div id="step_1" class="hidden_class wrapperSteps">
-
-			<h3>How many people are coming in your party?</h3>
-
-			<input type="checkbox" class="numOfPpl" value="1"> 1
-
-			<input type="checkbox" class="numOfPpl" value="2"> 2
-
-			<input type="checkbox" class="numOfPpl" value="3"> 3
-
-			<input type="checkbox" class="numOfPpl" value="4"> 4
-
-			<input type="checkbox" class="numOfPpl" value="5"> 5
-
-			<input type="checkbox" class="numOfPpl" value="6"> 6
-
-		</div>
-
-		
-
-		<div id="step_2" class="hidden_class wrapperSteps">
-
-			<h3>What the name(s) of the person/people coming in your party?</h3>
-
-			<div id="nameInputDivs">
-			</div>
-
-		</div>
-
-		<div id="step_3" class="hidden_class wrapperSteps">
-
-			<h3>Now, Lets talk diet.</h3>
-
-			<p>Check all that apply for Grandpy</p>
-
-			<div id="dietCheckBoxDiv"></div>
-
-			
-
-
-		</div>
-
-		<div id="step_4" class="hidden_class wrapperSteps">
-
-			<h3>Thanks for RSVPing!</h3>
-
-			<p>Did you know that Emma Witmer(the bat mitzvah) made this website?</p>
-
-			<p>We can't wait to see you at <a href="https://www.google.com/maps/place/Manzo's+Banquets+%26+Catering/@42.0234768,-87.9418855,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x30d7f00a71eff93d!8m2!3d42.0234768!4d-87.9396968">Manzo's Banquets and Catering</a> on Feb 11th 2018 at
-			11:30am</p>
-
-		</div>
-
-
-
-
-	
-	<script>
-	$(document).ready(function(){
-
-		var now_showing = 0; 
-
-
-		function nextStep() {
-			console.log("YAY!! IT WORKS!");
-			var RSVPsteps = document.querySelectorAll(".wrapperSteps");
-			var numOfSteps = RSVPsteps.length;
-
-			if (now_showing <= (numOfSteps - 2) ) {
-				var idToHide = "step_" + now_showing;
-				document.getElementById(idToHide).style.display = "none";
-				now_showing ++;
-				var idToShow = "step_" + now_showing;
-				document.getElementById(idToShow).style.display = "initial";
-			}
-			console.log("now_showing: ", now_showing);
-
-			if (now_showing == 3) {
-				dietQs();
-			}
-		}
-
-		function dietQs() {
-			var nameInputs = document.querySelectorAll(".inputClass");
-			console.log("nameInputs: ", nameInputs);
-			var pplInputs = "";
-			
-			for (var i = 0; i < nameInputs.length; i++) {
-				console.log("nameInputs[i]:", nameInputs[i].value);
-				pplInputs += '<p>' + nameInputs[i].value + '<input type="checkbox"> Kosher\
-							<input type="checkbox"> Gluten free\
-							<input type="checkbox"> Low carb\
-							<input type="checkbox"> Vegetarian\
-							<input type="checkbox"> <input type="text"></p>';
-			}
-
-			document.getElementById("dietCheckBoxDiv").innerHTML = pplInputs;
-		}
-
-		$("#nextButt").on("click", nextStep);
-
-		$(".numOfPpl").on("click", function(e) {
-			console.log("Someone just clicked one of these checkboxes");
-			console.log("here is the e that was passed to the click handler: ", e);
-			console.log("This should be the number that was clicked: ", e.target.value);
-			loadInputs(e.target.value);
-		});
-
-		function loadInputs (numOfInputs) {
-			console.log("numOfInputs: ", numOfInputs);
-			var myString = "";
-
-			for (var i = 0; i < numOfInputs; i++) {
-				myString += "<input class='inputClass'></input>";
-			}
-
-			console.log(myString);
-			document.getElementById("nameInputDivs").innerHTML = myString;
-		}
-
-		// function blueButt() {
-		// 	document.body.style.backgroundColor = "#478dff";
-		// }
-
-		// function pinkButt() {
-		// 	document.body.style.backgroundColor = "#ff5bb0";
-		// }
-
-		// function whiteButt() {
-		// 	document.body.style.backgroundColor = "white";
-		// }
-
-	
-
-	});
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+	  crossorigin="anonymous">
 	</script>
 
-	</body>
+</head>
+
+<body>
+
+
+	<style>
+
+	.hidden_class {
+		display: none;
+	}
+
+	</style>
+	<div class="container">
+		<div class="row">
+
+			<div id="step_0" class="wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
+
+				<h1>Hello!</h1>
+
+				<!-- <button onclick="blueButt()" id="Blue">Click here to have the back-ground blue.</button>
+
+				<button onclick="pinkButt()" id="Pink">Click here to have the back-ground pink.</button>
+
+				<button onclick="whiteButt()" id="White">Click here to have the back-ground white.</button> -->
+
+				<h3>Please answer a few questions to RSVP</h3>
+
+
+			</div>
+
+			<div id="step_1" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
+
+				<h3>How many people are coming in your party?</h3>
+
+				<input type="checkbox" class="numOfPpl" value="1"> 1
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="2"> 2
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="3"> 3
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="4"> 4
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="5"> 5
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="6"> 6
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="7"> 7
+
+				<br>
+
+				<input type="checkbox" class="numOfPpl" value="8"> 8
+
+			</div>
+
+			
+
+			<div id="step_2" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
+
+				<h3>What the name(s) of the person/people coming in your party?</h3>
+
+				<div id="nameInputDivs">
+				</div>
+
+			</div>
+
+			<div id="step_3" class="hidden_class wrapperSteps col-xs-12 col-md-offset-2 col-md-6">
+
+				<h3>Now, Lets talk diet.</h3>
+
+				<p>Check all that apply for each person</p>
+
+				<div id="dietCheckBoxDiv"></div>
+
+				
+
+
+			</div>
+
+			<div id="step_4" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
+
+				<h3>Thanks for RSVPing!</h3>
+
+				<p>Did you know that Emma Witmer(the bat mitzvah) made this website?</p>
+
+				<p>We can't wait to see you at <a href="https://www.google.com/maps/place/Manzo's+Banquets+%26+Catering/@42.023
+				4768,-87.9418855,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x30d7f00a71eff93d!8m2!3d42.0234768!4d-87.9396968">
+				Manzo's Banquets and Catering</a> on Feb 11th 2018 at
+				11:30am</p>
+
+			</div>
+
+			<div id="buttons" class="col-xs-5 col-md-offset-4 col-md-2">
+				<button id="nextButt">NEXT</button>
+
+				<button id="prevButt">BACK</button>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<script>
+$(document).ready(function(){
+
+	var now_showing = 0; 
+
+
+	function nextStep() {
+		console.log("YAY!! IT WORKS!");
+		var RSVPsteps = document.querySelectorAll(".wrapperSteps");
+		var numOfSteps = RSVPsteps.length;
+
+		if (now_showing <= (numOfSteps - 2) ) {
+			var idToHide = "step_" + now_showing;
+			document.getElementById(idToHide).style.display = "none";
+			now_showing ++;
+			var idToShow = "step_" + now_showing;
+			document.getElementById(idToShow).style.display = "initial";
+		}
+		console.log("now_showing: ", now_showing);
+
+		if (now_showing == 3) {
+			dietQs();
+		}
+	}
+
+				
+					
+	function lastStep() {
+		console.log("the back button works!");
+		var RSVPsteps = document.querySelectorAll(".wrapperDiv");
+		var numOfSteps = RSVPsteps.length;
+		console.log("now_showing: ", now_showing);
+		console.log("numOfSteps + 2: ", numOfSteps +2);
+
+		if ( now_showing >= 1 ) {
+			var idToHide = "step_" + now_showing;
+			document.getElementById(idToHide).style.display = "none";
+			now_showing --;
+			var idToShow = "step_" + now_showing;
+			document.getElementById(idToShow).style.display = "initial";
+
+		}
+	}
+
+	function dietQs() {
+		var nameInputs = document.querySelectorAll(".inputClass");
+		console.log("nameInputs: ", nameInputs);
+		var pplInputs = "";
+		
+		for (var i = 0; i < nameInputs.length; i++) {
+			console.log("nameInputs[i]:", nameInputs[i].value);
+			pplInputs += '<p> <span style="font-weight: bold">' + nameInputs[i].value + ': </span> \
+						<input type="checkbox">Kosher &nbsp\
+						<input type="checkbox"> Gluten free &nbsp;\
+						<input type="checkbox"> Low carb &nbsp\
+						<input type="checkbox"> Vegetarian &nbsp\
+						<input type="checkbox"> Dariy free</p>';
+		}
+
+		document.getElementById("dietCheckBoxDiv").innerHTML = pplInputs;
+	}
+
+	$("#nextButt").on("click", nextStep);
+
+	$("#prevButt").on("click", lastStep)
+
+	$(".numOfPpl").on("click", function(e) {
+		console.log("Someone just clicked one of these checkboxes");
+		console.log("here is the e that was passed to the click handler: ", e);
+		console.log("This should be the number that was clicked: ", e.target.value);
+		loadInputs(e.target.value);
+	});
+
+	function loadInputs (numOfInputs) {
+		console.log("numOfInputs: ", numOfInputs);
+		var myString = "";
+
+		for (var i = 0; i < numOfInputs; i++) {
+			myString += "<input class='inputClass'></input>";
+		}
+
+		console.log(myString);
+		document.getElementById("nameInputDivs").innerHTML = myString;
+	}
+
+	// function blueButt() {
+	// 	document.body.style.backgroundColor = "#478dff";
+	// }
+
+	// function pinkButt() {
+	// 	document.body.style.backgroundColor = "#ff5bb0";
+	// }
+
+	// function whiteButt() {
+	// 	document.body.style.backgroundColor = "white";
+	// }
+
+
+
+});
+</script>
+
+</body>
 
 </html>
