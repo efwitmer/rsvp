@@ -30,12 +30,6 @@
 
 				<h1>Hello!</h1>
 
-				<!-- <button onclick="blueButt()" id="Blue">Click here to have the back-ground blue.</button>
-
-				<button onclick="pinkButt()" id="Pink">Click here to have the back-ground pink.</button>
-
-				<button onclick="whiteButt()" id="White">Click here to have the back-ground white.</button> -->
-
 				<h3>Please answer a few questions to RSVP</h3>
 
 
@@ -81,7 +75,7 @@
 
 			<div id="step_2" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
-				<h3>What the name(s) of the person/people coming in your party?</h3>
+				<h3>Please enter the name(s) of the person/people coming in your party?</h3>
 
 				<div id="nameInputDivs">
 				</div>
@@ -101,7 +95,20 @@
 
 			</div>
 
-			<div id="step_4" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
+			<div id="step_4" class="hidden_class wrapperSteps col-xs-12 col-md-offset-3 col-md-5">
+				<h3>
+					Please double check that everything looks right.
+				</h3>
+				<!-- <p>
+					If so, please take a screenshot and send it to 312-523-1609
+				</p> -->
+
+				<div id="isThisGood">
+					
+				</div>
+			</div>
+
+			<div id="step_5" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
 				<h3>Thanks for RSVPing!</h3>
 
@@ -115,9 +122,11 @@
 			</div>
 
 			<div id="buttons" class="col-xs-5 col-md-offset-4 col-md-2">
-				<button id="nextButt">NEXT</button>
 
 				<button id="prevButt">BACK</button>
+
+				<button id="nextButt">NEXT</button>
+
 			</div>
 		</div>
 	</div>
@@ -128,7 +137,8 @@
 <script>
 $(document).ready(function(){
 
-	var now_showing = 0; 
+	var now_showing = 0;
+	var RSVParray; 
 
 
 	function nextStep() {
@@ -148,10 +158,49 @@ $(document).ready(function(){
 		if (now_showing == 3) {
 			dietQs();
 		}
+
+		if (now_showing == 4) {
+			doubleCheck();
+		}
 	}
 
 				
-					
+	function doubleCheck() {
+		var nameInputs = document.querySelectorAll(".inputClass");
+		var myHTML = "";
+		RSVParray = [];
+		for (var i = 0; i < nameInputs.length; i++) {
+			var name = nameInputs[i].value;
+			myHTML += "<p>" + name + ": &nbsp ";
+			var personObj = {firstName : name};
+			var checkboxArray = document.querySelectorAll("." + name);
+			var diets = 0;
+			for (var p = 0; p < checkboxArray.length; p++) {
+				if (checkboxArray[p].checked) {
+					diets++;
+					personObj[checkboxArray[p].dataset.diet] = true;
+					if (diets > 1) {
+						myHTML += ", ";
+					}
+					if (checkboxArray[p].dataset.diet == 'glutenFree') {
+						myHTML += "gluten free";
+					} else if (checkboxArray[p].dataset.diet == 'dairyFree') {
+						myHTML += "dairy free";
+					} else if (checkboxArray[p].dataset.diet == 'lowCarb') {
+						myHTML += "low carb";
+					} else {
+						myHTML += checkboxArray[p].dataset.diet;
+					}
+
+				}
+			}
+			RSVParray.push(personObj);
+			myHTML += "</p>";
+		}
+		console.log("RSVParray", RSVParray);
+		document.getElementById("isThisGood").innerHTML = myHTML;
+	}
+
 	function lastStep() {
 		console.log("the back button works!");
 		var RSVPsteps = document.querySelectorAll(".wrapperDiv");
@@ -177,11 +226,11 @@ $(document).ready(function(){
 		for (var i = 0; i < nameInputs.length; i++) {
 			console.log("nameInputs[i]:", nameInputs[i].value);
 			pplInputs += '<p> <span style="font-weight: bold">' + nameInputs[i].value + ': </span> \
-						<input type="checkbox">Kosher &nbsp\
-						<input type="checkbox"> Gluten free &nbsp;\
-						<input type="checkbox"> Low carb &nbsp\
-						<input type="checkbox"> Vegetarian &nbsp\
-						<input type="checkbox"> Dariy free</p>';
+						<input class="' + nameInputs[i].value + '" data-diet="kosher" type="checkbox"> Kosher &nbsp\
+						<input class="' + nameInputs[i].value + '" data-diet="glutenFree" type="checkbox"> Gluten free &nbsp;\
+						<input class="' + nameInputs[i].value + '" data-diet="lowCarb" type="checkbox"> Low carb &nbsp\
+						<input class="' + nameInputs[i].value + '" data-diet="vegetarian" type="checkbox"> Vegetarian &nbsp\
+						<input class="' + nameInputs[i].value + '" data-diet="dairyFree" type="checkbox"> Dariy free</p>';
 		}
 
 		document.getElementById("dietCheckBoxDiv").innerHTML = pplInputs;
@@ -210,22 +259,69 @@ $(document).ready(function(){
 		document.getElementById("nameInputDivs").innerHTML = myString;
 	}
 
-	// function blueButt() {
-	// 	document.body.style.backgroundColor = "#478dff";
-	// }
+	$("#colorSelect").on("change", function(e){
+		console.log("this.value: ", this.value);
 
-	// function pinkButt() {
-	// 	document.body.style.backgroundColor = "#ff5bb0";
-	// }
-
-	// function whiteButt() {
-	// 	document.body.style.backgroundColor = "white";
-	// }
+		if (this.value != "x") {
+			document.body.style.backgroundColor = this.value
+		}
+	});
 
 
 
 });
+
+// function blueButt() {
+// 	document.body.style.backgroundColor = "#478dff";
+// }
+
+// function pinkButt() {
+// 	document.body.style.backgroundColor = "#ff5bb0";
+// }
+
+// function whiteButt() {
+// 	document.body.style.backgroundColor = "white";
+// }
+
+// function silverButt() {
+// 	document.body.style.backgroundColor = "silver";
+// }
 </script>
+
+
+<select id="colorSelect">
+
+	<option value="x">
+		Change Color
+	</option>
+
+	<option value="#478dff">
+		Blue
+	</option>
+
+	<option value="#ff5bb0">
+		Pink
+	</option>
+
+	<option value="white">
+		White
+	</option>
+
+	<option value="silver">
+		Silver
+	</option>
+</select>
+
+
+
+
+<!-- <button type="button" onclick="blueButt()">Click here to have the back ground blue</button>
+
+<button onclick="pinkButt()" id="Pink">Click here to have the back-ground pink.</button>
+
+<button onclick="whiteButt()" id="White">Click here to have the back-ground white.</button>
+
+<button onclick="silverButt()" id="Silver">Click here to have the back-ground sliver.</button> -->
 
 </body>
 
