@@ -18,6 +18,7 @@ var routes = {
 	        				LEFT JOIN family_members AS fm \
 	        					ON fm.family_id = f.id     \
 	        				WHERE f.family_name = ?;";
+
 	        	queryDb(sql, [familyName], function(err, results) {
 	        		if (err) {
 	        			return console.log("db qeury error....");
@@ -70,6 +71,7 @@ var routes = {
 
 	        	var sql2 = "INSERT INTO family_members \
 	        				SET ?;";
+	        				
 	        	queryDb(sql1, [familyName], function(err, results) {
 	        		if (err) {
 	        			console.log("Error getting family.id while saving rsvps to db: ", err);
