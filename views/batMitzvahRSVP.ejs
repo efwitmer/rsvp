@@ -23,13 +23,17 @@
 		display: none;
 	}
 
+	body {
+		background-color: #ff5bb0;
+	}
+
 	#invite {
 		font-family: lobster;
 		font-size: 20px;
 	}
 
 	</style>
-	<div class="container">
+	<!-- <div class="container">
 		<div class="row">
 			<div>
 				<select id="colorSelect">
@@ -53,7 +57,7 @@
 						Silver
 					</option>
 				</select>
-			</div>
+			</div> -->
 			<div id="step_0" class="wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
 				<p id="invite">
@@ -305,13 +309,13 @@ $(document).ready(function(){
 		document.getElementById("nameInputDivs").innerHTML = myString;
 	}
 
-	$("#colorSelect").on("change", function(e){
-		console.log("this.value: ", this.value);
+	// $("#colorSelect").on("change", function(e){
+	// 	console.log("this.value: ", this.value);
 
-		if (this.value != "x") {
-			document.body.style.backgroundColor = this.value
-		}
-	});
+	// 	if (this.value != "x") {
+	// 		document.body.style.backgroundColor = this.value
+	// 	}
+	// });
 
 	
 
