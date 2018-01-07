@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster|Raleway|Syncopate" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha3
 	84-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,15 +23,47 @@
 		display: none;
 	}
 
+	#invite {
+		font-family: lobster;
+		font-size: 20px;
+	}
+
 	</style>
 	<div class="container">
 		<div class="row">
+			<div>
+				<select id="colorSelect">
+					<option value="x">
+						Change Color
+					</option>
 
+					<option value="#478dff">
+						Blue
+					</option>
+
+					<option value="#ff5bb0">
+						Pink
+					</option>
+
+					<option value="white">
+						White
+					</option>
+
+					<option value="silver">
+						Silver
+					</option>
+				</select>
+			</div>
 			<div id="step_0" class="wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
-				<h1>Hello!</h1>
-
-				<h3>Please answer a few questions to RSVP</h3>
+				<p id="invite">
+					It is with great gratitude to G-d that we invite you to celebrate Emma Witmer's
+					Bat Mitzvah. 11:30am on Feb 18 2018 at Manzo's Banquets and Catering, 1571 S Elmhurt
+					Rd, Des Plaines, IL 60018.
+					<br>
+					<br>
+					Please press next and answer a few questions to RSVP! :)
+				</p>
 
 
 			</div>
@@ -39,35 +72,39 @@
 
 				<h3>How many people are coming in your party?</h3>
 
-				<input type="checkbox" class="numOfPpl" value="1"> 1
+				<form>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="1"> 1
 
-				<input type="checkbox" class="numOfPpl" value="2"> 2
+					<br>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="2"> 2
 
-				<input type="checkbox" class="numOfPpl" value="3"> 3
+					<br>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="3"> 3
 
-				<input type="checkbox" class="numOfPpl" value="4"> 4
+					<br>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="4"> 4
 
-				<input type="checkbox" class="numOfPpl" value="5"> 5
+					<br>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="5"> 5
 
-				<input type="checkbox" class="numOfPpl" value="6"> 6
+					<br>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="6"> 6
 
-				<input type="checkbox" class="numOfPpl" value="7"> 7
+					<br>
 
-				<br>
+					<input type="radio" name="pplComing" class="numOfPpl" value="7"> 7
 
-				<input type="checkbox" class="numOfPpl" value="8"> 8
+					<br>
+
+					<input type="radio" name="pplComing" class="numOfPpl" value="8"> 8
+
+				</form>
 
 			</div>
 
@@ -75,14 +112,14 @@
 
 			<div id="step_2" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
-				<h3>Please enter the name(s) of the person/people coming in your party?</h3>
+				<h3>Please enter the first name(s) of the person/people coming in your party?</h3>
 
 				<div id="nameInputDivs">
 				</div>
 
 			</div>
 
-			<div id="step_3" class="hidden_class wrapperSteps col-xs-12 col-md-offset-2 col-md-6">
+			<div id="step_3" class="hidden_class wrapperSteps col-xs-12 col-md-offset-3 col-md-6">
 
 				<h3>Now, Lets talk diet.</h3>
 
@@ -112,20 +149,20 @@
 
 				<h3>Thanks for RSVPing!</h3>
 
-				<p>Did you know that Emma Witmer(the bat mitzvah) made this website?</p>
+				<p>Did you know that Emma Witmer (the Bat Mitzvah) made this website?</p>
 
 				<p>We can't wait to see you at <a href="https://www.google.com/maps/place/Manzo's+Banquets+%26+Catering/@42.023
 				4768,-87.9418855,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x30d7f00a71eff93d!8m2!3d42.0234768!4d-87.9396968">
-				Manzo's Banquets and Catering</a> on Feb 11th 2018 at
+				Manzo's Banquets and Catering</a> on Feb 18th 2018 at
 				11:30am</p>
 
 			</div>
 
-			<div id="buttons" class="col-xs-5 col-md-offset-4 col-md-2">
+			<div id="buttons" class="col-xs-12 col-md-offset-4 col-md-4">
 
-				<button id="prevButt">BACK</button>
+				<button type="button" class="btn btn-default btn-lg col-xs-6" id="prevButt">BACK</button>
 
-				<button id="nextButt">NEXT</button>
+				<button type="button" class="btn btn-default btn-lg col-xs-6" id="nextButt">NEXT</button>
 
 			</div>
 		</div>
@@ -162,6 +199,12 @@ $(document).ready(function(){
 		if (now_showing == 4) {
 			doubleCheck();
 		}
+
+		if (now_showing == 5) {
+		console.log("this works! yay!!")
+		document.getElementById("nextButt").style.display = "none";
+		document.getElementById("prevButt").style.display = "none";
+	}
 	}
 
 				
@@ -249,12 +292,15 @@ $(document).ready(function(){
 
 	function loadInputs (numOfInputs) {
 		console.log("numOfInputs: ", numOfInputs);
-		var myString = "";
+		var myString = "<form>";
 
 		for (var i = 0; i < numOfInputs; i++) {
-			myString += "<input class='inputClass'></input>";
+			myString += "<div class='form-group'>\
+						<input type='text' class='form-control inputClass' placeholder='Name'>\
+						</div>";
 		}
 
+		myString += "</form>";
 		console.log(myString);
 		document.getElementById("nameInputDivs").innerHTML = myString;
 	}
@@ -266,6 +312,8 @@ $(document).ready(function(){
 			document.body.style.backgroundColor = this.value
 		}
 	});
+
+	
 
 
 
@@ -289,28 +337,7 @@ $(document).ready(function(){
 </script>
 
 
-<select id="colorSelect">
 
-	<option value="x">
-		Change Color
-	</option>
-
-	<option value="#478dff">
-		Blue
-	</option>
-
-	<option value="#ff5bb0">
-		Pink
-	</option>
-
-	<option value="white">
-		White
-	</option>
-
-	<option value="silver">
-		Silver
-	</option>
-</select>
 
 
 
