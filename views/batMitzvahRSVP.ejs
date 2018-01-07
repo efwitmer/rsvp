@@ -7,9 +7,9 @@
 	84-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<script
-	  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-	  crossorigin="anonymous">
+	    src="https://code.jquery.com/jquery-3.2.1.min.js"
+	    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	    crossorigin="anonymous">
 	</script>
 
 </head>
@@ -172,6 +172,9 @@
 
 
 <script>
+var alreadyRSVPed = <%- JSON.stringify(alreadyRSVPed) %>;
+var familyName = '<%- familyName %>';
+
 $(document).ready(function(){
 
 	var now_showing = 0;
@@ -201,12 +204,30 @@ $(document).ready(function(){
 		}
 
 		if (now_showing == 5) {
-		console.log("this works! yay!!")
-		document.getElementById("nextButt").style.display = "none";
-		document.getElementById("prevButt").style.display = "none";
-	}
+			console.log("this works! yay!!")
+			document.getElementById("nextButt").style.display = "none";
+			document.getElementById("prevButt").style.display = "none";
+			sendToServer();
+		}
 	}
 
+	function sendToServer () {
+		$.ajax({
+			method	: "POST",
+			url		: "/submit_rsvp_data",
+			data 	: {data : JSON.stringify(RSVParray), familyName : familyName},
+			dataType: "json",
+			success : function (data, textStatus) {
+				console.log("data: ", data);
+				console.log("textStatus: ", textStatus);
+			},
+			error   : function (jqxhr, textStatus, err) {
+				console.log("err: ", err);
+				console.log("jqxhr: ", jqxhr);
+				console.log("textStatus: ", textStatus);
+			}
+		});
+	}
 				
 	function doubleCheck() {
 		var nameInputs = document.querySelectorAll(".inputClass");
