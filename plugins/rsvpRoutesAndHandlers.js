@@ -1,5 +1,8 @@
 var mysql = require('mysql');
 
+// TODO: 1) make subsequent rsvps replace all old ones. (delete previous and then replace)
+// 		 2) make some sort of message in the UI that says this.
+
 var routes = {
 	register: function (server, options, next) {
 
@@ -11,7 +14,7 @@ var routes = {
 	        	var familyName = request.params.familyName ? request.params.familyName : null;
 	        	if (!familyName) {
 	        		console.log("No matching family name.  TODO: create error reply");
-	        		return reply("Uh-oh, we've encountered a database issue.  Blame Nat, not Emma.... and please call Laurie to rsvp  :)");
+	        		return reply.view("noFamilyId.ejs");
 	        	}
 	        	var sql =  "SELECT *                       \
 	        				FROM family AS f               \
@@ -44,7 +47,7 @@ var routes = {
 	        				}
 	        			} else {
 	        				console.log("No matching family name.  TODO: create error reply");
-	        				return reply("Uh-oh, we've encountered a database issue.  Blame Nat, not Emma.... and please call Laurie to rsvp  :)");
+	        				return reply.view("noFamilyId.ejs");
 	        			}
 	        		}
 	        	});
