@@ -23,13 +23,30 @@
 		display: none;
 	}
 
+	body {
+		background-color: #ff5bb0;
+	}
+
 	#invite {
 		font-family: lobster;
 		font-size: 20px;
+		text-align: center;
+	}
+
+	.wrapperSteps {
+		margin-top: 100px
+	}
+
+	#numberOfPpl {
+		margin-bottom: 10px;
+	}
+
+	span {
+		font-size: 24px;
 	}
 
 	</style>
-	<div class="container">
+	<!-- <div class="container">
 		<div class="row">
 			<div>
 				<select id="colorSelect">
@@ -53,12 +70,20 @@
 						Silver
 					</option>
 				</select>
-			</div>
+			</div> -->
 			<div id="step_0" class="wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
 				<p id="invite">
-					It is with great gratitude to G-d that we invite you to celebrate Emma Witmer's
-					Bat Mitzvah. 11:30am on Feb 18 2018 at Manzo's Banquets and Catering, 1571 S Elmhurt
+					It is with great gratitude to G-d that we invite you to celebrate 
+					<br>
+					<span>Emma Witmer's Bat Mitzvah.</span>
+					<br>
+					<br>
+					Feb 18 2018
+					<br>
+					11:30am
+					<br>
+					Manzo's Banquets and Catering, 1571 S Elmhurt
 					Rd, Des Plaines, IL 60018.
 					<br>
 					<br>
@@ -72,7 +97,9 @@
 
 				<h3>How many people are coming in your party?</h3>
 
-				<form>
+				<input type="number" class="form-control" id="numberOfPpl">
+
+				<!-- <form>
 
 					<input type="radio" name="pplComing" class="numOfPpl" value="1"> 1
 
@@ -105,7 +132,7 @@
 					<input type="radio" name="pplComing" class="numOfPpl" value="8"> 8
 
 				</form>
-
+ -->
 			</div>
 
 			
@@ -194,6 +221,11 @@ $(document).ready(function(){
 			document.getElementById(idToShow).style.display = "initial";
 		}
 		console.log("now_showing: ", now_showing);
+
+		if (now_showing == 2) {
+			var numOfPpl = document.getElementById("numberOfPpl").value;
+			loadInputs(numOfPpl);
+		}
 
 		if (now_showing == 3) {
 			dietQs();
@@ -307,12 +339,12 @@ $(document).ready(function(){
 
 	$("#prevButt").on("click", lastStep)
 
-	$(".numOfPpl").on("click", function(e) {
-		console.log("Someone just clicked one of these checkboxes");
-		console.log("here is the e that was passed to the click handler: ", e);
-		console.log("This should be the number that was clicked: ", e.target.value);
-		loadInputs(e.target.value);
-	});
+	// $(".numOfPpl").on("click", function(e) {
+	// 	console.log("Someone just clicked one of these checkboxes");
+	// 	console.log("here is the e that was passed to the click handler: ", e);
+	// 	console.log("This should be the number that was clicked: ", e.target.value);
+	// 	loadInputs(e.target.value);
+	// });
 
 	function loadInputs (numOfInputs) {
 		console.log("numOfInputs: ", numOfInputs);
@@ -329,13 +361,13 @@ $(document).ready(function(){
 		document.getElementById("nameInputDivs").innerHTML = myString;
 	}
 
-	$("#colorSelect").on("change", function(e){
-		console.log("this.value: ", this.value);
+	// $("#colorSelect").on("change", function(e){
+	// 	console.log("this.value: ", this.value);
 
-		if (this.value != "x") {
-			document.body.style.backgroundColor = this.value
-		}
-	});
+	// 	if (this.value != "x") {
+	// 		document.body.style.backgroundColor = this.value
+	// 	}
+	// });
 
 	
 
