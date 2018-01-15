@@ -45,6 +45,11 @@
 		font-size: 24px;
 	}
 
+	#name-warning {
+		padding: 10px;
+		border-radius: 4px;
+	}
+
 	</style>
 	<!-- <div class="container">
 		<div class="row">
@@ -140,6 +145,9 @@
 			<div id="step_2" class="hidden_class wrapperSteps col-xs-12 col-md-offset-4 col-md-4">
 
 				<h3>Please enter the first name(s) of the person/people coming in your party?</h3>
+				<p class="bg-warning col-xs-12 hidden" id="name-warning">
+					Please only enter first name without spaces or special characters
+				</p>
 
 				<div id="nameInputDivs">
 				</div>
@@ -212,7 +220,15 @@ $(document).ready(function(){
 		console.log("YAY!! IT WORKS!");
 		var RSVPsteps = document.querySelectorAll(".wrapperSteps");
 		var numOfSteps = RSVPsteps.length;
-
+		if (now_showing == 2) {
+			var goodValues = checkNames();
+			if (!goodValues) {
+				$("#name-warning").removeClass("hidden");
+				return;
+			} else {
+				$("#name-warning").addClass("hidden");
+			}
+		}
 		if (now_showing <= (numOfSteps - 2) ) {
 			var idToHide = "step_" + now_showing;
 			document.getElementById(idToHide).style.display = "none";
@@ -240,6 +256,22 @@ $(document).ready(function(){
 			document.getElementById("nextButt").style.display = "none";
 			document.getElementById("prevButt").style.display = "none";
 			sendToServer();
+		}
+	}
+
+	function checkNames () {
+		var nameInputs = document.querySelectorAll(".inputClass");
+		var validInputs = true;
+		var i;
+		for (i = 0; i < nameInputs.length; i++) {
+			if (!/^[a-zA-Z]+$/.test(nameInputs[i].value)) {
+				validInputs = false;
+			}
+		}
+		if (validInputs == false) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 
